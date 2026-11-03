@@ -119,10 +119,11 @@ export function SiteFooter() {
         <div>
           <p className="label mb-2">Elsewhere</p>
           <ul className="space-y-1 text-[13px] text-black/60">
-            <li>Instagram ↗</li>
-            <li>X / Twitter ↗</li>
-            <li>Behance ↗</li>
-          </ul>
+            <a href="https://instagram.com/widostorm" target="_blank" rel="noreferrer" className="hover:text-black">
+        Instragram ↗ </a> 
+            <a href="https://payhip.com/widojp" target="_blank" rel="noreferrer" className="hover:text-black">
+        Pre-Made Cover ↗ </a> 
+          </ul> 
         </div>
         <div className="md:text-right">
           <p className="text-[13px] tracking-[0.2em] text-black/60">{t('footer.note')}</p>

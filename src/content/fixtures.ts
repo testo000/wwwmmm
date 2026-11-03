@@ -10,7 +10,7 @@ import type { Locale, Localized } from '@/lib/i18n'
 export const SITE = {
   name: 'www',
   handle: '@widostorm',
-  email: 'w@wido.jp',
+  email: 'www@tsuteji.com',
   since: 2015,
 }
 
@@ -40,15 +40,33 @@ const img = (
 
 
 
+
 export const IMAGES = {
-  'cover-01': img('cover-01', 1024, 1024, 'frost_final_v3.jpg'),
-  'cover-02': img('cover-02', 1024, 1024, 'red-circle_collage.jpg'),
-  'cover-03': img('cover-03', 1024, 1024, 'rooftop_dusk.jpg'),
-  'header-01': img('header-01', 1376, 768, 'header_powerlines.jpg'),
-  'header-02': img('header-02', 1376, 768, 'header_chrome_halftone.jpg'),
-  'illus-01': img('illus-01', 896, 1200, 'white_room.jpg'),
-  'live-01': img('live-01', 1376, 768, 'live_screen_IMG_0412.jpg'),
-  'process-01': img('process-01', 1200, 896, 'thumbnails_tracing.jpg'),
+  'cover-01': img('cover-01', 3000, 3000, 'str.jpg', '/works'),
+  'cover-02': img('cover-02', 3000, 3000, 'stlt.jpg', 'works'),
+  'cover-03': img('cover-03', 3000, 3000, '26.jpg', '/works'),
+  'cover-04': img('cover-04', 3000, 3000, 'the_forbidden_tapes_front.jpg', '/works'),
+  'cover-05': img('cover-05', 3000, 3000, 'le_ciel_m_accable.jpg', '/works'),
+  'cover-06': img('cover-06', 3000, 3000, 'lush_mud.jpg', '/works'),
+  'cover-07': img('cover-07', 3000, 3000, 'castle.jpg', '/gallery'),
+  'cover-08': img('cover-08', 3000, 3000, 'm_irl.jpg', '/gallery'),
+  'cover-09': img('cover-09', 3000, 3000, 'eternalhell.jpg', '/gallery'),
+  'cover-10': img('cover-10', 3000, 3000, 'dont_betray_yourself.jpg', '/gallery'),
+  'cover-11': img('cover-11', 3000, 3000, 'morning_star_front.jpg', '/archive'),
+  'cover-12': img('cover-12', 3000, 3000, 'morning_star_back.jpg', '/archive'),
+  'cover-13': img('cover-13', 3000, 3000, 'morning_star_casette.jpg', '/archive'),
+  'cover-14': img('cover-14', 3000, 3000, 'morning_star_vinyl.jpg', '/archive'),
+  
+  'header-01': img('header-01', 1500, 500, 'alonzo.jpg', '/archive'),
+  'header-02': img('header-02', 1500, 500, 'iron.jpg', '/archive'),
+  'header-03': img('header-03', 1500, 500, 'lilpinga.jpg', '/archive'),
+  'header-04': img('header-04', 1500, 500, 'sebas.jpg', '/archive'),
+  
+  'sp-01': img('sp-01', 1200, 674, 'streampack_1.jpg', '/archive'),
+  'sp-02': img('sp-02', 1200, 674, 'streampack_2.jpg', '/archive'),
+  'sp-03': img('sp-03', 1200, 674, 'streampack_3.jpg', '/archive'),
+  'sp-04': img('sp-04', 1200, 674, 'streampack_4.jpg', '/archive'),
+
   'ref-01': img('ref-01', 1023, 1280, 'ref-01.jpg', 'refs/revenge-x-aeri'),
   'screenshot1': img('screenshot1', 1002, 634, 'screenshot1.jpg', 'refs/revenge-x-aeri'),
   
@@ -74,18 +92,17 @@ export type GalleryItem = {
 }
 
 export const GALLERY: GalleryItem[] = [
-  { id: 'g01', code: 'G-014', title: { es: 'Frost', ja: 'フロスト', ko: '프로스트', zh: '霜' }, type: 'cover', year: 2026, image: 'cover-01', medium: { es: 'Foto + edición digital', en: 'Photo + digital edit', ja: '写真＋デジタル加工', ko: '사진 + 디지털 편집', zh: '摄影 + 数字后期' } },
-  { id: 'g02', code: 'G-013', title: { es: 'Tendido eléctrico', en: 'Power lines', ja: '電線', ko: '전선', zh: '电线' }, type: 'header', year: 2026, image: 'header-01', medium: { es: 'Pintura digital', en: 'Digital painting', ja: 'デジタルペイント', ko: '디지털 페인팅', zh: '数字绘画' } },
-  { id: 'g03', code: 'G-012', title: { es: 'Sala blanca', en: 'White room', ja: '白い部屋', ko: '하얀 방', zh: '白色房间' }, type: 'illustration', year: 2026, image: 'illus-01', medium: { es: 'Ilustración digital', en: 'Digital illustration', ja: 'デジタルイラスト', ko: '디지털 일러스트', zh: '数字插画' } },
-  { id: 'g04', code: 'G-011', title: { es: 'Círculo rojo', en: 'Red circle', ja: '赤い円', ko: '붉은 원', zh: '红圈' }, type: 'cover', year: 2025, image: 'cover-02', medium: { es: 'Collage analógico, escaneado', en: 'Analog collage, scanned', ja: 'アナログコラージュ、スキャン', ko: '아날로그 콜라주, 스캔', zh: '模拟拼贴，扫描' } },
-  { id: 'g05', code: 'G-010', title: { es: 'Cromo / trama', en: 'Chrome / halftone', ja: 'クローム／網点', ko: '크롬 / 망점', zh: '铬 / 网点' }, type: 'header', year: 2025, image: 'header-02', medium: { es: '3D + trama', en: '3D + halftone', ja: '3D＋網点', ko: '3D + 망점', zh: '3D + 网点' } },
-  { id: 'g06', code: 'G-009', title: { es: 'Azotea al atardecer', en: 'Rooftop at dusk', ja: '夕暮れの屋上', ko: '해질녘 옥상', zh: '黄昏屋顶' }, type: 'cover', year: 2025, image: 'cover-03', medium: { es: 'Ilustración digital', en: 'Digital illustration', ja: 'デジタルイラスト', ko: '디지털 일러스트', zh: '数字插画' } },
-  { id: 'g07', code: 'G-008', title: { es: 'Pantalla / glitch', en: 'Screen / glitch', ja: 'スクリーン／グリッチ', ko: '스크린 / 글리치', zh: '屏幕 / 故障' }, type: 'visual', year: 2025, image: 'live-01', medium: { es: 'Visual en bucle, 4K', en: 'Looping visual, 4K', ja: 'ループ映像 4K', ko: '루프 비주얼, 4K', zh: '循环视觉，4K' } },
+  { id: 'c01', code: 'c-001', title: { es: 'title_4_this', ja: 'title_4_this', ko: 'title_4_this', zh: 'title_4_this' }, type: 'cover', year: 2024, image: 'cover-07', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c02', code: 'c-002', title: { es: 'm_irl', ja: 'm_irl', ko: 'm_irl', zh: 'm_irl' }, type: 'cover', year: 2024, image: 'cover-08', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c03', code: 'c-003', title: { es: 'eternalhell', ja: 'eternalhell', ko: 'eternalhell', zh: 'eternalhell' }, type: 'cover', year: 2024, image: 'cover-09', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c04', code: 'c-004', title: { es: 'dont_betray_yourself', ja: 'dont_betray_yourself', ko: 'dont_betray_yourself', zh: 'dont_betray_yourself' }, type: 'cover', year: 2024, image: 'cover-10', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
 ]
 
 /* ------------------------------------------------------------------ */
 /* Works — piezas usadas de verdad                                     */
 /* ------------------------------------------------------------------ */
+
+export type UsedOn = { label: string; url?: string }
 
 export type Work = {
   id: string
@@ -93,7 +110,7 @@ export type Work = {
   title: Localized
   client: string
   role: Localized
-  usedOn: string
+  usedOn: UsedOn[]
   link?: string
   year: number
   image: ImageId
@@ -103,76 +120,99 @@ export type Work = {
 export const WORKS: Work[] = [
   {
     id: 'w01',
-    code: 'W-006',
-    title: { es: '“Frost” — single', en: '“Frost” — single', ja: '「Frost」シングル', ko: '“Frost” — 싱글', zh: '《Frost》单曲' },
-    client: 'Haru Vale',
-    role: { es: 'Portada + canvas', en: 'Cover + canvas', ja: 'ジャケット＋Canvas', ko: '커버 + 캔버스', zh: '封面 + Canvas' },
-    usedOn: 'Spotify / Apple Music',
-    link: 'https://open.spotify.com',
+    code: 'W-001',
+    title: { es: 'Star Engine' },
+    client: 'Unisixn',
+    role: { es: 'Portada', en: 'Cover', ja: 'ジャケット', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'Spotify', url: 'https://open.spotify.com/album/0qjy7COQFI5d7QxzWJQSQF' },
+      { label: 'Apple Music', url: 'https://music.apple.com/us/album/star-engine-single/6790467786?uo=4' },
+      { label: 'Deezer', url: 'https://www.deezer.com/album/1028173302' },
+      { label: 'Soundcloud', url: 'https://soundcloud.com/unisixn/unisixn-star-engine-final-1' },
+    ],
     year: 2026,
     image: 'cover-01',
-    note: {
-      es: 'Foto tomada a través de un cristal empañado. El canvas de Spotify es la misma imagen respirando lentamente.',
-      en: 'Shot through fogged glass. The Spotify canvas is the same image slowly breathing.',
-      ja: '曇ったガラス越しに撮影。SpotifyのCanvasは同じ画像がゆっくり呼吸する映像。',
-      ko: '김 서린 유리 너머로 촬영. Spotify 캔버스는 같은 이미지가 천천히 숨쉬는 영상.',
-      zh: '隔着起雾的玻璃拍摄。Spotify Canvas 是同一张图像缓慢呼吸的版本。',
-    },
+    note: { es: ' ' },
   },
   {
     id: 'w02',
-    code: 'W-005',
-    title: { es: 'Gira “Señal” — visuales', en: '“Signal” tour — visuals', ja: '「Signal」ツアー映像', ko: '“Signal” 투어 — 비주얼', zh: '“Signal” 巡演视觉' },
-    client: 'NOISE//GARDEN',
-    role: { es: 'Visuales para pantalla LED', en: 'LED screen visuals', ja: 'LEDスクリーン映像', ko: 'LED 스크린 비주얼', zh: 'LED 屏幕视觉' },
-    usedOn: 'Live — Sala Apolo, BCN',
-    year: 2025,
-    image: 'live-01',
-    note: {
-      es: 'Doce bucles sincronizados al BPM de cada tema. Foto desde el público, noche 2.',
-      en: 'Twelve loops synced to each track’s BPM. Photo from the crowd, night 2.',
-      ja: '各曲のBPMに同期した12本のループ。2日目、客席から撮影。',
-      ko: '곡마다 BPM에 맞춘 12개의 루프. 둘째 날 관객석에서 촬영.',
-      zh: '十二段循环，与每首歌的 BPM 同步。第二晚台下拍摄。',
-    },
+    code: 'W-002',
+    title: { es: 'stiletto' },
+    client: 'Omar1',
+    role: { es: 'Portada', en: 'Cover', ja: 'ジャケット', ko: '커버', zh: '封面' },
+    usedOn: [{ label: 'Spotify', url: 'https://open.spotify.com/track/3bTfiLhxbnZYwDyGNOdbNh' }],
+    year: 2026,
+    image: 'cover-02',
+    note: { es: ' ' },
   },
   {
     id: 'w03',
-    code: 'W-004',
-    title: { es: '“Rojo sobre negro” — EP', en: '“Red on black” — EP', ja: '「Red on Black」EP', ko: '“Red on Black” — EP', zh: '《黑上之红》EP' },
-    client: 'Mirei K.',
-    role: { es: 'Portada + vinilo', en: 'Cover + vinyl', ja: 'ジャケット＋レコード', ko: '커버 + 바이닐', zh: '封面 + 黑胶' },
-    usedOn: 'Spotify / Bandcamp / 12"',
-    link: 'https://bandcamp.com',
-    year: 2025,
-    image: 'cover-02',
-    note: {
-      es: 'Collage hecho a mano y escaneado a 1200 ppp para que el papel se notara en el vinilo.',
-      en: 'Hand-made collage scanned at 1200 dpi so the paper shows on the vinyl.',
-      ja: '手作りのコラージュを1200dpiでスキャンし、レコードで紙の質感が出るように。',
-      ko: '손으로 만든 콜라주를 1200dpi로 스캔해 바이닐에서 종이 질감이 보이도록.',
-      zh: '手工拼贴，以 1200 dpi 扫描，让纸张质感在黑胶上显现。',
-    },
+    code: 'W-003',
+    title: { es: '26' },
+    client: 'альтлот!',
+    role: { es: 'Portada', en: 'Cover', ja: 'ジャケット', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'VK Music', url: 'https://music.vk.com/link/KdfaJ' },
+      { label: 'KION Music', url: 'https://music.mts.ru/album/43512904' },
+      { label: 'Yandex Music', url: 'https://music.yandex.ru/album/43512904' },
+      { label: 'Spotify', url: 'https://open.spotify.com/album/07NFsAqUziKFDfTXHFYmUx' },
+      { label: 'Apple Music', url: 'https://music.apple.com/ru/album/6800705712?mt=1&at=1000lqjf&ct=bq&app=music' },
+    ],
+    year: 2026,
+    image: 'cover-03',
+    note: { es: ' ' },
   },
   {
     id: 'w04',
-    code: 'W-003',
-    title: { es: '“Azotea” — single', en: '“Rooftop” — single', ja: '「屋上」シングル', ko: '“옥상” — 싱글', zh: '《屋顶》单曲' },
-    client: 'sora no oto',
-    role: { es: 'Portada + header de lanzamiento', en: 'Cover + release header', ja: 'ジャケット＋リリースヘッダー', ko: '커버 + 발매 헤더', zh: '封面 + 发行头图' },
-    usedOn: 'Spotify / YouTube',
-    link: 'https://open.spotify.com',
-    year: 2025,
-    image: 'cover-03',
+    code: 'W-004',
+    title: { es: '禁断のテープ [THE FORBIDDEN TAPES]' },
+    client: 'SC@R',
+    role: { es: 'Portada + header de lanzamiento', en: 'Cover, front and back', ja: 'カバー、表と裏', ko: '커버, 앞면과 뒷면', zh: '封面，正面与背面' },
+    usedOn: [{ label: 'Bandcamp', url: 'https://scatteredscars.bandcamp.com/album/the-forbidden-tapes' }],
+    year: 2026,
+    image: 'cover-04',
     note: {
-      es: 'La misma escena se recortó en cuadrado para la portada y en 16:9 para el vídeo.',
-      en: 'The same scene was cropped square for the cover and 16:9 for the video.',
-      ja: '同じシーンをジャケット用に正方形、動画用に16:9でトリミング。',
-      ko: '같은 장면을 커버용 정사각형, 영상용 16:9로 크롭.',
-      zh: '同一场景，封面裁为正方形，视频裁为 16:9。',
+      es: 'se me olvidó poner un carrousel cuando son más de una foto, posdata, compren el casette en físico por bandcamp!!',
+      en: "Forgot to add a carousel when there's more than one photo. P.S. buy the cassette on Bandcamp!!!",
+      ja: '写真が複数あるときのカルーセル、入れるの忘れてました。あと、カセットはBandcampで物理で買ってね！',
+      ko: '사진이 여러 장일 때 캐러셀 넣는 걸 깜빡했네요. 추신: 카세트는 반드시 Bandcamp에서 실물로 사 주세요!',
+      zh: '忘了放轮播图了，多张照片的时候用。另：实体磁带请去 Bandcamp 买！',
     },
   },
+  {
+    id: 'w05',
+    code: 'W-005',
+    title: { es: "Le Ciel M'Accable" },
+    client: 'HADA',
+    role: { es: 'Portada', en: 'Cover', ja: 'カバー', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'Spotify', url: 'https://open.spotify.com/intl-ja/album/0tltPIw9X9FWE7pj6Dbek8' },
+      { label: 'Apple Music', url: 'https://music.apple.com/us/album/le-ciel-maccable-single/6807506832' },
+      { label: 'Deezer', url: 'https://www.deezer.com/us/album/1068231901?host=6908338083&deferredFl=1' },
+    ],
+    year: 2026,
+    image: 'cover-05',
+    note: { es: ' ' },
+  },
+  {
+    id: 'w06',
+    code: 'W-006',
+    title: { es: 'LUSH MUD' },
+    client: 'GRAVEPILL',
+    role: { es: 'Portada', en: 'Cover', ja: 'カバー', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'Spotify', url: 'https://distrokid.com/hyperfollow/gravepill/lush-mud/' },
+      { label: 'Apple Music', url: 'https://music.apple.com/us/artist/gravepill/6823781372' },
+      { label: 'Bandcamp', url: 'https://gravepill.bandcamp.com/track/lush-mud' },
+      { label: 'Amazon Music', url: 'http://www.amazon.com/gp/product/B0HNC3K31W' },
+      { label: 'YouTube Music', url: 'https://www.youtube.com/watch?v=TLKVsGA3JXI' },
+    ],
+    year: 2026,
+    image: 'cover-06',
+    note: { es: ' ' },
+  },
 ]
+
 
 /* ------------------------------------------------------------------ */
 /* Archivo — procesos                                                   */
@@ -195,84 +235,55 @@ export type ArchiveEntry = {
 export const ARCHIVE: ArchiveEntry[] = [
   {
     id: 'a01',
-    code: 'A-031',
-    title: { es: 'R', en: 'Frost — thumbnails and tests', ja: 'Frost — サムネイルと試作', ko: 'Frost — 썸네일과 테스트', zh: 'Frost — 缩略稿与测试' },
-    date: '2026-09-12',
-    status: 'published',
-    images: ['process-01', 'cover-01'],
+    code: 'A-001',
+    title: { es: '14 y/o headers', en: '14 y/o headers', ja: '14歳のヘッダ', ko: '14살 헤더 ', zh: ' 14岁时的头图' },
+    date: '19-04-2018',
+    status: 'archived',
+    images: ['header-01', 'header-02', 'header-03', 'header-04'],
     note: {
-      es: 'Catorce miniaturas a lápiz antes de llegar a la foto. La composición final es la número 9.',
-      en: 'Fourteen pencil thumbnails before landing on the photo. The final layout is number 9.',
-      ja: '写真に辿り着くまでに14枚の鉛筆サムネイル。最終案は9番。',
-      ko: '사진에 이르기까지 14장의 연필 썸네일. 최종안은 9번.',
-      zh: '在确定照片前画了十四张铅笔缩略稿。最终构图是第 9 张。',
+      es: 'Los encontré en un borrador de mi cuenta de Behance con esa fecha de subida. También solía hacer cosas de Minecraft, pero tristemente no las subí y borré todas las cuentas de Twitter donde las publicaba. Fun fact: me acordé de que vendí mi cuenta con 2k de seguidores por 20$, de más está decir que me estafaron Dx',
+      en: 'Found them in a draft on my Behance account with that upload date. I also used to make Minecraft stuff, but sadly I never uploaded it and deleted all the Twitter accounts where I posted it. Fun fact: I remembered I sold my account with 2k followers for $20, needless to say, I got scammed XD ',
+      ja: 'Behanceのアカウントの下書きに、そのアップロード日付で見つけました。マイクラのやつもよく作ってたんだけど、残念ながら上げてなくて、投稿してたTwitterのアカウントは全部消しちゃいました。ファンファクト：フォロワー2kのアカウントを20ドルで売ったの思い出しました。言うまでもなく詐欺られましたWW。',
+      ko: 'Behance 계정 임시저장에 그 업로드 날짜로 있더라고요. 마인크래프트 것도 자주 만들었는데 아쉽게도 안 올렸고, 올리던 트위터 계정은 다 지워버렸어요. Fun fact: 팔로워 2천 있던 계정을 20달러에 팔았던 게 기억났는데, 말할 것도 없이 사기당했네요.',
+      zh: '我在 Behance 账号的草稿里找到的，上传日期就是那天。我以前也常做 Minecraft 的东西，可惜没上传，还把发它的 Twitter 账号全删了。Fun fact：想起来我那个 2k 粉丝的账号卖了 20 刀，不用说，被坑了。',
     },
-    tags: ['cover', 'sketch'],
+    tags: ['header'],
   },
+
   {
     id: 'a02',
-    code: 'A-030',
-    title: { es: 'Header cromado — descartes', en: 'Chrome header — rejects', ja: 'クロームヘッダー — ボツ案', ko: '크롬 헤더 — 탈락안', zh: '铬质头图 — 废稿' },
-    date: '2026-07-03',
-    status: 'unpublished',
-    images: ['header-02'],
+    code: 'A-002',
+    title: { es: 'morning star', en: 'morning star', ja: 'morning star', ko: 'morning star', zh: 'morning star' },
+    date: '18-08-2025',
+    status: 'published',
+    images: ['cover-11', 'cover-12', 'cover-13', 'cover-14'],
     note: {
-      es: 'Versiones que nunca enseñé. Me gusta más la trama de esta que la final.',
-      en: 'Versions I never showed. I like this halftone more than the final one.',
-      ja: '見せなかったバージョン。最終版より、この網点の方が好き。',
-      ko: '보여주지 않은 버전들. 최종본보다 이 망점이 더 좋다.',
-      zh: '从未展示过的版本。比起终稿，我更喜欢这一版的网点。',
+      es: 'No hay ninguna historia mamadora detrás de esto, más que fueron los primeros diseños que hice en el teléfono y me quería cortar los cocos en el proceso, pero salió piola si o que',
+      en: "There's no a deep backstory behind this, they were just the first designs I made on my phone and I wanted to cut my balls off in the process, but it turned out alright",
+      ja: 'これといったカッコいい裏話はなくて、ただスマホで初めて作ったデザインってだけ。途中で玉を切りたくなったけど、まあまあ良い感じに仕上がった。',
+      ko: '별 대단한 사연은 없고, 그냥 폰으로 처음 만든 디자인이에요. 중간에 불알 자르고 싶었지만 나름 괜찮게 나왔네요.',
+      zh: '没啥牛逼的故事，就是我在手机上做的第一批设计，过程中想把自己蛋割了，但结果还行',
     },
-    tags: ['header', '3d'],
+    tags: ['cover'],
   },
+
   {
     id: 'a03',
-    code: 'A-029',
-    title: { es: 'Sala blanca — bocetos de figura', en: 'White room — figure sketches', ja: '白い部屋 — 人物スケッチ', ko: '하얀 방 — 인물 스케치', zh: '白色房间 — 人物草图' },
-    date: '2026-05-21',
+    code: 'A-003',
+    title: { es: 'Stream Packs', en: 'Stream Packs', ja: 'Stream Packs', ko: 'Stream Packs', zh: 'Stream Packs' },
+    date: '01-12-2024',
     status: 'archived',
-    images: ['illus-01'],
+    images: ['sp-01', 'sp-02', 'sp-03', 'sp-04'],
     note: {
-      es: 'No pienso subirlo. Lo guardo porque aquí entendí cómo usar el vacío.',
-      en: 'Not planning to post it. Keeping it because this is where I understood how to use emptiness.',
-      ja: '公開する予定はない。余白の使い方がわかった作品なので残しておく。',
-      ko: '올릴 생각은 없다. 여백을 쓰는 법을 이해한 작업이라 남겨둔다.',
-      zh: '不打算发布。留着它，是因为在这里我明白了如何使用留白。',
+      es: 'En un momento en que no me daba ni el sol, hacía cualquier cosa por ganarme dos monedas; entre eso hice stream packs. Todos estos son solo pruebas, solo me comisionaron dos personas pero fueron stream packs animados Dx, cuando descubra cómo descargar los videos de Behance, los subo acá',
+      en: "Back when nobody gave me the time of day, when I was invisible to everyone, I'd do anything to make a couple of bucks; among other things, I made stream packs. All of these are just tests; only two people commissioned me, but they were animated stream packs. Once I figure out how to download the videos from Behance I'll upload them here",
+      ja: '誰にも相手にされず、みんなから見えない存在だった頃、二束三文のために何でもやってた。その一つがストリームパック。これらは全部ただのテストで、依頼してくれたのは二人だけだったけど、アニメーションのストリームパックだった。Behanceから動画をダウンロードする方法がわかったら、ここに上げます。',
+      ko: '아무도 나한테 관심을 안 주고, 모두에게 투명인간이었던 시절에 돈 몇 푼 벌려고 뭐든 했는데, 그중 하나가 스트림 팩이었어요. 이건 전부 그냥 테스트고, 의뢰는 두 명만 받았지만 애니메이션 스트림 팩이었어요. Behance에서 영상 다운로드하는 법 알게 되면 여기 올릴게요.',
+      zh: '那会儿没人搭理我，在所有人眼里都是透明的，为了挣两个钱什么都干，其中就做了 stream pack。这些都只是测试，只有两个人找我约稿，不过是动态的 stream pack。等我搞明白怎么从 Behance 下载视频，就传到这儿来。，但结果还行',
     },
-    tags: ['illustration'],
+    tags: ['cover'],
   },
-  {
-    id: 'a04',
-    code: 'A-028',
-    title: { es: 'Señal — storyboard de visuales', en: 'Signal — visuals storyboard', ja: 'Signal — 映像ストーリーボード', ko: 'Signal — 비주얼 스토리보드', zh: 'Signal — 视觉分镜' },
-    date: '2025-11-02',
-    status: 'published',
-    images: ['live-01', 'header-01'],
-    note: {
-      es: 'Mapa de colores por canción y referencias de ritmo para cada bucle.',
-      en: 'Color map per song and rhythm references for each loop.',
-      ja: '曲ごとのカラーマップと、各ループのリズム参考。',
-      ko: '곡별 컬러 맵과 각 루프의 리듬 레퍼런스.',
-      zh: '每首歌的色彩地图与各循环的节奏参考。',
-    },
-    tags: ['visual', 'live'],
-  },
-  {
-    id: 'a05',
-    code: 'A-027',
-    title: { es: 'Collage — papel suelto', en: 'Collage — loose paper', ja: 'コラージュ — 紙片', ko: '콜라주 — 낱장 종이', zh: '拼贴 — 散纸' },
-    date: '2025-08-17',
-    status: 'archived',
-    images: ['cover-02'],
-    note: {
-      es: 'Recortes que sobraron del EP. Solo archivo.',
-      en: 'Leftover cut-outs from the EP. Archive only.',
-      ja: 'EPの残りの切り抜き。アーカイブのみ。',
-      ko: 'EP에서 남은 조각들. 보관 전용.',
-      zh: 'EP 剩下的剪纸。仅存档。',
-    },
-    tags: ['collage'],
-  },
+
 ]
 
 /* ------------------------------------------------------------------ */

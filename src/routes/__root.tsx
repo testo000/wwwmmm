@@ -9,9 +9,9 @@ import { I18nProvider } from '@/lib/i18n'
 
 import '../styles.css'
 
-const siteName = 'UNTITLED — Archivo de arte'
+const siteName = "Wido Storm's Archive"
 const siteDescription =
-  'Portadas, headers, visuales para directo, procesos y referencias. Un archivo de arte en ES / EN / 日本語 / 한국어 / 中文.'
+  'Covers, headers, visuals for live broadcasts, processes, and references. An art archive'
 
 export const Route = createRootRoute({
   head: () => ({

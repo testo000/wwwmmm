@@ -39,15 +39,26 @@ function WorksPage() {
                 <dl className="mt-6 grid max-w-md grid-cols-[8rem_1fr] border-t border-black/10 text-[12px]">
                   <Spec label={t('works.client')} value={w.client} />
                   <Spec label={t('works.role')} value={pick(w.role)} />
-                  <Spec label={t('works.usedOn')} value={w.usedOn} />
+                  <dt className="label border-b border-black/[0.06] py-2">{t('works.usedOn')}</dt>
+<dd className="border-b border-black/[0.06] py-2">
+  <ul className="flex flex-wrap gap-x-2 gap-y-1">
+    {w.usedOn.map((item) => (
+      <li key={item.label}>
+        {item.url ? (
+          <a href={item.url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-black">
+            {item.label}
+          </a>
+        ) : (
+          item.label
+        )}
+      </li>
+    ))}
+  </ul>
+</dd>
                   <Spec label={t('common.year')} value={String(w.year)} />
                 </dl>
 
-                {w.link && (
-                  <a href={w.link} target="_blank" rel="noreferrer" className="label mt-4 inline-block hover:text-black">
-                    ↗ {w.usedOn.split(' / ')[0]}
-                  </a>
-                )}
+          
               </div>
             </article>
           )
