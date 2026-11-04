@@ -64,6 +64,13 @@ export const IMAGES = {
   'cover-34': img('cover-34', 3000, 3000, 'mar80.jpg', '/works'),
   'cover-35': img('cover-35', 3000, 3000, 'polar.jpg', '/works'),
 
+  'poster-01': img('poster-01', 3508, 4961, 'ania.jpg', '/works'),
+  'poster-02': img('poster-02', 3508, 4961, 'caraazul.jpg', '/works'),
+  'poster-03': img('poster-03', 3508, 4961, 'gusano.jpg', '/works'),
+ 
+
+
+
 
 //gallery
   'cover-07': img('cover-07', 3000, 3000, 'castle.jpg', '/gallery'),
@@ -273,7 +280,7 @@ export const WORKS: Work[] = [
     code: 'W-004',
     title: { es: '禁断のテープ [THE FORBIDDEN TAPES]' },
     client: 'SC@R',
-    role: { es: 'Portada + header de lanzamiento', en: 'Cover, front and back', ja: 'カバー、表と裏', ko: '커버, 앞면과 뒷면', zh: '封面，正面与背面' },
+    role: { es: 'Portada, frente y reverso ', en: 'Cover, front and back', ja: 'カバー、表と裏', ko: '커버, 앞면과 뒷면', zh: '封面，正面与背面' },
     usedOn: [{ label: 'Bandcamp', url: 'https://scatteredscars.bandcamp.com/album/the-forbidden-tapes' }],
     year: 2026,
     image: 'cover-04',
@@ -359,6 +366,24 @@ export const WORKS: Work[] = [
     year: 2026,
     image: 'cover-35',
     note: { es: ' ' },
+  },
+  {
+    id: 'w10',
+    code: 'W-010',
+    title: { es: 'CFBT Posters' },
+    client: 'CFBT COMIC',
+      role: { es: 'Póster', en: 'Poster', ja: 'ポスター', ko: '포스터', zh: '海报' },
+    usedOn: [{ label: 'Read it here', url: 'https://cfbtcomic.com/read.php' }],
+    year: 2026,
+    image: 'cover-04',
+    images: ['poster-01', 'poster-02', 'poster-03'],  // ← agrega esta línea
+      note: {
+        es: 'Nunca me esperaba colaborar con un cómic lol! me encantó y recomiendo leerlos si se quieren traumar un poco más con la situación distópica que vivimos hoy en día, espero equivocarme pero no está muy lejano el futuro del cómic . . . por cierto, si apoyan el post se lanzarán los pósters en físico!! ( está fijado en mi perfil )',
+        en: "Never expected to collab with a comic lol! I loved it and I recommend reading them if you want to get a little more traumatized by the dystopian situation we're living in today, I hope I'm wrong but the comic's future isn't that far off . . . by the way, if the post gets support the posters will drop in physical form!! (it's pinned on my profile)",
+        ja: 'まさかコミックとコラボするとは思わなかった！めっちゃ良かったし、今のディストピアな状況でもっとトラウマを味わいたいなら読むのをおすすめする。外れてほしいけど、コミックの未来はそんなに遠くない . . . ちなみに、投稿を支援してもらえたらポスターが物理で出るよ！！（プロフィールにピン留めしてある）',
+        ko: '설마 만화랑 콜라보하게 될 줄은! 너무 좋았고, 요즘 우리가 사는 디스토피아 상황으로 좀 더 트라우마를 받고 싶다면 읽어보는 걸 추천해. 틀렸으면 좋겠지만 만화 속 미래가 그렇게 멀지 않아 . . . 참고로 게시물을 응원해주면 포스터가 실물로 나온대!! (내 프로필에 고정돼 있어)',
+        zh: '完全没想到会跟一部漫画合作！我超喜欢，如果想被当下这种反乌托邦的处境再多折磨一下，推荐去读。希望是我错了，但漫画里的未来离得并不远 . . . 另外，如果帖子支持够的话海报会出实体版！！（置顶在我主页）',
+      },
   },
 ]
 
