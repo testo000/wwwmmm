@@ -8,7 +8,7 @@
 import type { Locale, Localized } from '@/lib/i18n'
 
 export const SITE = {
-  name: 'www',
+  name: 'wm',
   handle: '@widostorm',
   email: 'www@tsuteji.com',
   since: 2015,
@@ -22,6 +22,8 @@ export type ImageAsset = {
   /** Filename shown in the viewer title bar, macOS Preview style. */
   filename: string
 }
+
+export type ImageId = keyof typeof IMAGES
 
 const img = (
   id: string,
@@ -42,20 +44,68 @@ const img = (
 
 
 export const IMAGES = {
+  // works
   'cover-01': img('cover-01', 3000, 3000, 'str.jpg', '/works'),
   'cover-02': img('cover-02', 3000, 3000, 'stlt.jpg', 'works'),
   'cover-03': img('cover-03', 3000, 3000, '26.jpg', '/works'),
   'cover-04': img('cover-04', 3000, 3000, 'the_forbidden_tapes_front.jpg', '/works'),
+  'cover-04.5': img('cover-04.5', 3000, 3000, 'the_forbidden_tapes_back.jpg', '/works'),
   'cover-05': img('cover-05', 3000, 3000, 'le_ciel_m_accable.jpg', '/works'),
   'cover-06': img('cover-06', 3000, 3000, 'lush_mud.jpg', '/works'),
+  'cover-20': img('cover-20', 3000, 3000, 'steel.jpg', '/works'),
+  'cover-34': img('cover-34', 3000, 3000, 'mar80.jpg', '/works'),
+  'cover-35': img('cover-35', 3000, 3000, 'polar.jpg', '/works'),
+
+
+//gallery
   'cover-07': img('cover-07', 3000, 3000, 'castle.jpg', '/gallery'),
   'cover-08': img('cover-08', 3000, 3000, 'm_irl.jpg', '/gallery'),
   'cover-09': img('cover-09', 3000, 3000, 'eternalhell.jpg', '/gallery'),
   'cover-10': img('cover-10', 3000, 3000, 'dont_betray_yourself.jpg', '/gallery'),
+  'cover-21': img('cover-21', 3000, 3000, 'go.jpg', '/gallery'),
+  'cover-22': img('cover-22', 3000, 3000, 'lost_title1.jpg', '/gallery'),
+  'cover-23': img('cover-23', 3000, 3000, 'celestia_decay.jpg', '/gallery'),
+  'cover-24': img('cover-24', 3000, 3000, 'del_vacio_destino1.jpg', '/gallery'),
+  'cover-25': img('cover-25', 3000, 3000, 'del_vacio_destino2.jpg', '/gallery'),
+  'cover-26': img('cover-26', 3000, 3000, '4am.jpg', '/gallery'),
+  'cover-27': img('cover-27', 3000, 3000, 'lost_title2.jpg', '/gallery'),
+  'cover-28': img('cover-28', 3000, 3000, 'lost_title3.jpg', '/gallery'),
+
+
+  'header-05': img('header-05', 1500, 500, 'kiru_biru.jpg', '/gallery'),
+  'header-06': img('header-06', 1500, 500, 'jujutsu.jpg', '/gallery'),
+  'header-07': img('header-07', 1500, 500, 'eternalhell2.jpg', '/gallery'),
+  'header-08': img('header-08', 1500, 500, 'trigun.jpg', '/gallery'),
+  'header-09': img('header-09', 1500, 500, 'clan_entry.jpg', '/gallery'),
+  'header-10': img('header-10', 1500, 500, 'kisstar.jpg', '/gallery'),
+  'header-11': img('header-11', 1500, 500, 'rigel.jpg', '/gallery'),
+  'header-12': img('header-12', 1500, 500, 'always_forever.jpg', '/gallery'),
+  'header-13': img('header-13', 1500, 500, 'the_deadman_in_the_wonderland.jpg', '/gallery'),
+  'header-14': img('header-14', 1500, 500, 'if_heaven_had_feelings.jpg', '/gallery'),
+
+
+
+
+// archive
+
   'cover-11': img('cover-11', 3000, 3000, 'morning_star_front.jpg', '/archive'),
   'cover-12': img('cover-12', 3000, 3000, 'morning_star_back.jpg', '/archive'),
   'cover-13': img('cover-13', 3000, 3000, 'morning_star_casette.jpg', '/archive'),
   'cover-14': img('cover-14', 3000, 3000, 'morning_star_vinyl.jpg', '/archive'),
+  'cover-15': img('cover-15', 3000, 3000, 'steel_1.jpg', '/archive'),
+  'cover-16': img('cover-16', 3000, 3000, 'steel_2.jpg', '/archive'),
+  'cover-17': img('cover-17', 3000, 3000, 'steel_3.jpg', '/archive'),
+  'cover-18': img('cover-18', 1280, 720, 'steel_refs.jpg', '/archive'),
+  'cover-19': img('cover-19', 3000, 3000, 'steel_lost_draft.jpg', '/archive'),
+
+  'cover-29': img('cover-29', 1280, 720, 'mar80_drafts1.jpg', '/archive'),
+  'cover-30': img('cover-30', 1280, 720, 'mar80_drafts2.jpg', '/archive'),
+  'cover-31': img('cover-31', 1280, 720, 'mar80_drafts3.jpg', '/archive'),
+  'cover-32': img('cover-32', 1280, 720, 'mar80_drafts4.jpg', '/archive'),
+  'cover-33': img('cover-33', 1280, 720, 'mar80_refs.jpg', '/archive'),
+
+
+
   
   'header-01': img('header-01', 1500, 500, 'alonzo.jpg', '/archive'),
   'header-02': img('header-02', 1500, 500, 'iron.jpg', '/archive'),
@@ -67,12 +117,13 @@ export const IMAGES = {
   'sp-03': img('sp-03', 1200, 674, 'streampack_3.jpg', '/archive'),
   'sp-04': img('sp-04', 1200, 674, 'streampack_4.jpg', '/archive'),
 
+  //refs 
   'ref-01': img('ref-01', 1023, 1280, 'ref-01.jpg', 'refs/revenge-x-aeri'),
   'screenshot1': img('screenshot1', 1002, 634, 'screenshot1.jpg', 'refs/revenge-x-aeri'),
   
 } satisfies Record<string, ImageAsset>
 
-export type ImageId = keyof typeof IMAGES
+// export type ImageId = keyof typeof IMAGES
 
 /* ------------------------------------------------------------------ */
 /* Galería                                                             */
@@ -92,10 +143,29 @@ export type GalleryItem = {
 }
 
 export const GALLERY: GalleryItem[] = [
-  { id: 'c01', code: 'c-001', title: { es: 'title_4_this', ja: 'title_4_this', ko: 'title_4_this', zh: 'title_4_this' }, type: 'cover', year: 2024, image: 'cover-07', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
-  { id: 'c02', code: 'c-002', title: { es: 'm_irl', ja: 'm_irl', ko: 'm_irl', zh: 'm_irl' }, type: 'cover', year: 2024, image: 'cover-08', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
-  { id: 'c03', code: 'c-003', title: { es: 'eternalhell', ja: 'eternalhell', ko: 'eternalhell', zh: 'eternalhell' }, type: 'cover', year: 2024, image: 'cover-09', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
-  { id: 'c04', code: 'c-004', title: { es: 'dont_betray_yourself', ja: 'dont_betray_yourself', ko: 'dont_betray_yourself', zh: 'dont_betray_yourself' }, type: 'cover', year: 2024, image: 'cover-10', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c01', code: 'c-001', title: { es: 'title_4_this', ja: 'title_4_this', ko: 'title_4_this', zh: 'title_4_this' }, type: 'cover', year: 2023, image: 'cover-07', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c02', code: 'c-002', title: { es: 'm_irl', ja: 'm_irl', ko: 'm_irl', zh: 'm_irl' }, type: 'cover', year: 2023, image: 'cover-08', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c03', code: 'c-003', title: { es: 'eternalhell', ja: 'eternalhell', ko: 'eternalhell', zh: 'eternalhell' }, type: 'cover', year: 2023, image: 'cover-09', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c04', code: 'c-004', title: { es: 'dont_betray_yourself', ja: 'dont_betray_yourself', ko: 'dont_betray_yourself', zh: 'dont_betray_yourself' }, type: 'cover', year: 2025, image: 'cover-10', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h01', code: 'h-001', title: { es: 'kiru_biru', ja: 'kiru_biru', ko: 'kiru_biru', zh: 'kiru_biru' }, type: 'header', year: 2024, image: 'header-05', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h02', code: 'h-002', title: { es: 'jujutsu', ja: 'jujutsu', ko: 'jujutsu', zh: 'jujutsu' }, type: 'header', year: 2024, image: 'header-06', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h03', code: 'h-003', title: { es: 'eternalhell2', ja: 'eternalhell2', ko: 'eternalhell2', zh: 'eternalhell2' }, type: 'header', year: 2024, image: 'header-07', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h04', code: 'h-004', title: { es: 'trigun', ja: 'trigun', ko: 'trigun', zh: 'trigun' }, type: 'header', year: 2024, image:'header-08', medium: { es:'manipulación fotográfica', en:'photo manipulation', ja:'フォトマニピュレーション', ko:'포토 매니퓰레이션', zh:'图像合成（照片合成）' } },
+  { id: 'h05', code: 'h-005', title: { es: 'clan_entry', ja: 'clan_entry', ko: 'clan_entry', zh: 'clan_entry' }, type: 'header', year: 2024, image: 'header-09', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h06', code: 'h-006', title: { es: 'kisstar', ja: 'kisstar', ko: 'kisstar', zh: 'kisstar' }, type: 'header', year: 2024, image: 'header-10', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c05', code: 'c-005', title: { es: 'go', ja: 'go', ko: 'go', zh: 'go' }, type: 'cover', year: 2025, image: 'cover-21', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c06', code: 'c-006', title: { es: 'lost_title', ja: 'lost_title', ko: 'lost_title', zh: 'lost_title' }, type: 'cover', year: 2024, image: 'cover-22', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c07', code: 'c-007', title: { es: 'celestia_decay', ja: 'celestia_decay', ko: 'celestia_decay', zh: 'celestia_decay' }, type: 'cover', year: 2025, image: 'cover-23', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c08', code: 'c-008', title: { es: 'del_vacio_destino1', ja: 'del_vacio_destino1', ko: 'del_vacio_destino1', zh: 'del_vacio_destino1' }, type: 'cover', year: 2025, image: 'cover-24', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c09', code: 'c-009', title: { es: 'del_vacio_destino2', ja: 'del_vacio_destino2', ko: 'del_vacio_destino2', zh: 'del_vacio_destino2' }, type: 'cover', year: 2025, image: 'cover-25', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c10', code: 'c-010', title: { es: '4am', ja: '4am', ko: '4am', zh: '4am' }, type: 'cover', year: 2023, image: 'cover-26', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c11', code: 'c-011', title: { es: 'lost_title2', ja: 'lost_title2', ko: 'lost_title2', zh: 'lost_title2' }, type: 'cover', year: 2023, image: 'cover-27', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'c12', code: 'c-012', title: { es: 'lost_title3', ja: 'lost_title3', ko: 'lost_title3', zh: 'lost_title3' }, type: 'cover', year: 2023, image: 'cover-28', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h07', code: 'h-007', title: { es: 'rigel', ja: 'rigel', ko: 'rigel', zh: 'rigel' }, type: 'header', year: 2025, image: 'header-11', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h08', code: 'h-008', title: { es: 'always_forever', ja: 'always_forever', ko: 'always_forever', zh: 'always_forever' }, type: 'header', year: 2025, image: 'header-12', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h09', code: 'h-009', title: { es: 'the_deadman_in_the_wonderland', ja: 'the_deadman_in_the_wonderland', ko: 'the_deadman_in_the_wonderland', zh: 'the_deadman_in_the_wonderland' }, type: 'header', year: 2025, image: 'header-13', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+  { id: 'h10', code: 'h-010', title: { es: 'if_heaven_had_feelings', ja: 'if_heaven_had_feelings', ko: 'if_heaven_had_feelings', zh: 'if_heaven_had_feelings' }, type: 'header', year: 2025, image: 'header-14', medium: { es: 'manipulación fotográfica', en: 'photo manipulation', ja: 'フォトマニピュレーション', ko: '포토 매니퓰레이션', zh: '图像合成（照片合成）' } },
+
 ]
 
 /* ------------------------------------------------------------------ */
@@ -111,11 +181,12 @@ export type Work = {
   client: string
   role: Localized
   usedOn: UsedOn[]
-  link?: string
   year: number
   image: ImageId
+  images?: ImageId[]   // ← agrega esta línea
   note: Localized
 }
+
 
 export const WORKS: Work[] = [
   {
@@ -171,13 +242,8 @@ export const WORKS: Work[] = [
     usedOn: [{ label: 'Bandcamp', url: 'https://scatteredscars.bandcamp.com/album/the-forbidden-tapes' }],
     year: 2026,
     image: 'cover-04',
-    note: {
-      es: 'se me olvidó poner un carrousel cuando son más de una foto, posdata, compren el casette en físico por bandcamp!!',
-      en: "Forgot to add a carousel when there's more than one photo. P.S. buy the cassette on Bandcamp!!!",
-      ja: '写真が複数あるときのカルーセル、入れるの忘れてました。あと、カセットはBandcampで物理で買ってね！',
-      ko: '사진이 여러 장일 때 캐러셀 넣는 걸 깜빡했네요. 추신: 카세트는 반드시 Bandcamp에서 실물로 사 주세요!',
-      zh: '忘了放轮播图了，多张照片的时候用。另：实体磁带请去 Bandcamp 买！',
-    },
+    images: ['cover-04', 'cover-04.5'],  // ← agrega esta línea
+    note: { es: ' ' },
   },
   {
     id: 'w05',
@@ -209,6 +275,54 @@ export const WORKS: Work[] = [
     ],
     year: 2026,
     image: 'cover-06',
+    note: { es: ' ' },
+  },
+
+    {
+    id: 'w07',
+    code: 'W-007',
+    title: { es: 'Mar80' },
+    client: 'Josefina Amado',
+    role: { es: 'Portada', en: 'Cover', ja: 'カバー', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'Spotify', url: 'https://open.spotify.com/album/6Xresz12ufcuFzPRM4p3Ki' },
+    ],
+    year: 2026,
+    image: 'cover-34',
+    note: { es: ' ' },
+  },
+
+   {
+    id: 'w08',
+    code: 'W-008',
+    title: { es: 'Steel' },
+    client: 'Speed Blacer & BLACEWAN',
+    role: { es: 'Portada', en: 'Cover', ja: 'カバー', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'Spotify', url: 'https://open.spotify.com/album/57wSQ2aD8YZiPmlWLrktec' },
+      { label: 'Apple Music', url: 'https://music.apple.com/us/album/steel-single/6825650330' },
+      { label: 'YouTube Music', url: 'https://www.youtube.com/watch?v=sfSJOSOL8Ls&list=OLAK5uy_nlHR6k_9tfL5dWDHeDkPP91SSo9b4Txxk&index=1' },
+      { label: 'Deezer', url: 'https://www.deezer.com/es/album/1127740351' },
+      { label: 'Soundcloud', url: 'https://soundcloud.com/speedblacer/steel' },
+    ],
+    year: 2026,
+    image: 'cover-20',
+    note: { es: ' ' },
+  },
+
+    {
+    id: 'w09',
+    code: 'W-009',
+    title: { es: 'Polar' },
+    client: 'HADA',
+    role: { es: 'Portada', en: 'Cover', ja: 'カバー', ko: '커버', zh: '封面' },
+    usedOn: [
+      { label: 'Spotify', url: 'https://open.spotify.com/album/6b1lzTD1tHWkYhbPiWdhuK' },
+      { label: 'Apple Music', url: 'https://music.apple.com/us/album/polar-single/6807531593' },
+      { label: 'Deezer', url: 'https://www.deezer.com/us/album/10682939311' },
+    ],
+    year: 2026,
+    image: 'cover-35',
     note: { es: ' ' },
   },
 ]
@@ -280,6 +394,40 @@ export const ARCHIVE: ArchiveEntry[] = [
       ja: '誰にも相手にされず、みんなから見えない存在だった頃、二束三文のために何でもやってた。その一つがストリームパック。これらは全部ただのテストで、依頼してくれたのは二人だけだったけど、アニメーションのストリームパックだった。Behanceから動画をダウンロードする方法がわかったら、ここに上げます。',
       ko: '아무도 나한테 관심을 안 주고, 모두에게 투명인간이었던 시절에 돈 몇 푼 벌려고 뭐든 했는데, 그중 하나가 스트림 팩이었어요. 이건 전부 그냥 테스트고, 의뢰는 두 명만 받았지만 애니메이션 스트림 팩이었어요. Behance에서 영상 다운로드하는 법 알게 되면 여기 올릴게요.',
       zh: '那会儿没人搭理我，在所有人眼里都是透明的，为了挣两个钱什么都干，其中就做了 stream pack。这些都只是测试，只有两个人找我约稿，不过是动态的 stream pack。等我搞明白怎么从 Behance 下载视频，就传到这儿来。，但结果还行',
+    },
+    tags: ['cover'],
+  },
+
+    {
+    id: 'a04',
+    code: 'A-004',
+    title: { es: ' Borradores de Steel  ', en: 'Steel draft versions', ja: 'STEELのドラフト版', ko: ' 스틸 초안 버전', zh: '钢铁草稿版本' },
+    date: '03-11-2026',
+    status: 'published', 
+    images: ['cover-15', 'cover-16', 'cover-17', 'cover-18', 'cover-19'],
+    note: {
+      es: 'En un momento en que no me daba ni el sol, hacía cualquier cosa por ganarme dos monedas; entre eso hice stream packs. Todos estos son solo pruebas, solo me comisionaron dos personas pero fueron stream packs animados Dx, cuando descubra cómo descargar los videos de Behance, los subo acá',
+      en: "Back when nobody gave me the time of day, when I was invisible to everyone, I'd do anything to make a couple of bucks; among other things, I made stream packs. All of these are just tests; only two people commissioned me, but they were animated stream packs. Once I figure out how to download the videos from Behance I'll upload them here",
+      ja: '誰にも相手にされず、みんなから見えない存在だった頃、二束三文のために何でもやってた。その一つがストリームパック。これらは全部ただのテストで、依頼してくれたのは二人だけだったけど、アニメーションのストリームパックだった。Behanceから動画をダウンロードする方法がわかったら、ここに上げます。',
+      ko: '아무도 나한테 관심을 안 주고, 모두에게 투명인간이었던 시절에 돈 몇 푼 벌려고 뭐든 했는데, 그중 하나가 스트림 팩이었어요. 이건 전부 그냥 테스트고, 의뢰는 두 명만 받았지만 애니메이션 스트림 팩이었어요. Behance에서 영상 다운로드하는 법 알게 되면 여기 올릴게요.',
+      zh: '那会儿没人搭理我，在所有人眼里都是透明的，为了挣两个钱什么都干，其中就做了 stream pack。这些都只是测试，只有两个人找我约稿，不过是动态的 stream pack。等我搞明白怎么从 Behance 下载视频，就传到这儿来。，但结果还行',
+    },
+    tags: ['cover'],
+  },
+
+    {
+    id: 'a05',
+    code: 'A-005',
+    title: { es: ' Borradores de Mar80 ', en: 'Mar80 draft versions', ja: 'MAR80のドラフト版', ko: ' MAR80 초안 버전', zh: '钢铁草稿版本' },
+    date: '04-11-2026',
+    status: 'published', 
+    images: ['cover-29', 'cover-30', 'cover-31', 'cover-32', 'cover-33', ],
+    note: {
+      es: 'Recuerdo que el dibujante del manga de One Punch Man Yusuke Murata (村田雄介), dijo que lo más difícil de dibujar era la cara simple de Saitama por lo simple que era, ya que los errores se notan mucho más en siluetas simples. Algo así me pasa a mí, cosas simples como esta portada y la de Steel me costaron un huevo porque no hay tanto margen para esconder los errores ni para que todo se vea complejo desde lejos, aunque por lo general todo se resuelve cuando uso texturas, lit una buena textura puede hacer que una cagada se vea como oro',
+      en: " I remember Yusuke Murata (村田雄介), the artist behind the One Punch Man manga, saying that the hardest thing to draw was Saitama's simple face precisely because it's so simple , mistakes show up way more. Something like that happens to me is that simple stuff like this cover and the Steel one was a pain in the ass, because there's not much room to hide mistakes or make everything look complex from a distance, tho usually it all works out once I use textures, a good texture can make a piece of shit look like gold",
+      ja: 'ワンパンマンの漫画を描いてる村田雄介さんが、一番難しいのはサイタマのシンプルな顔だって言ってたのを覚えてる。シンプルだからこそミスが目立つから、って。俺にも似たようなことが起きる。このジャケットとかSTEELのやつみたいなシンプルなやつはめちゃくちゃ難しかった。ミスを隠す余地も、遠目に複雑に見せる余裕もないから。でもだいたいはテクスチャで解決する。いいテクスチャがあれば、クソみたいなのも金に見えるから',
+      ko: '원펀맨 만화 작가인 무라타 유스케(村田雄介)가 제일 그리기 어려운 게 사이타마의 단순한 얼굴이라고 했던 게 기억나요. 단순해서 실수가 더 잘 보이니까요. 저도 비슷한 것 같아요. 이 커버나 Steel 커버 같은 단순한 작업이 힘들었어요. 실수를 숨길 여지도, 멀리서 봤을 때 복잡해 보이게 할 여유도 없으니까요. 그래도 보통은 텍스처로 다 해결돼요. 좋은 텍스처 하나면 똥도 금처럼 보이니까요',
+      zh: '我记得《一拳超人》漫画的作画村田雄介说过，最难画的是埼玉那张简单的脸，正因为太简单，错误才特别明显。我也有点类似的感觉。像这张封面和 Steel 那张这种简单的东西反而特别难搞，因为没多少空间去藏错误，也没法让它在远处看起来复杂。不过一般来说用纹理就都解决了，一块好纹理能让一坨屎看起来像金子',
     },
     tags: ['cover'],
   },

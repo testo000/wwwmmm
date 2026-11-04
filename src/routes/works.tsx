@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { PageHeader, Thumb } from '@/components/site/ui'
+import { PageHeader } from '@/components/site/ui'
 import { WORKS } from '@/content/fixtures'
 import { useI18n } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
+import { Carousel } from '@/components/site/carousel'
 
 export const Route = createFileRoute('/works')({
   head: () => ({ meta: [{ title: 'Works — UNTITLED' }] }),
@@ -29,8 +30,14 @@ function WorksPage() {
               </div>
 
               <div className={cn(wide ? 'md:col-span-6' : 'md:col-span-4')}>
-                <Thumb image={w.image} caption={`${w.code} — ${pick(w.title)}`} width={wide ? 1100 : 800} />
-              </div>
+              
+              <Carousel
+  images={w.images ?? [w.image]}
+  caption={`${w.code} — ${pick(w.title)}`}
+  width={wide ? 1100 : 800} />
+
+    </div>
+
 
               <div className={cn('flex flex-col', wide ? 'md:col-span-4' : 'md:col-span-6')}>
                 <h2 className="text-2xl font-medium tracking-tight md:text-3xl">{pick(w.title)}</h2>
