@@ -18,7 +18,40 @@ function RefsPage() {
     <>
       <PageHeader num="004" title={t('nav.refs')} desc={t('refs.desc')} meta={`${REFS.length} ${t('home.entries')}`} />
 
-      <section className="mx-auto max-w-[1440px] px-4 md:px-6">
+       <section className="mx-auto max-w-[1440px] px-4 md:px-6">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-8 pb-12 md:grid-cols-3 lg:grid-cols-4">
+          {REFS.map((r) => (
+            <Link
+              key={r.slug}
+              to="/refs/$slug"
+              params={{ slug: r.slug }}
+              className="group block"
+            >
+              <img
+                src={cdn(IMAGES[r.cover].src, 700)}
+                alt=""
+                loading="lazy"
+                className="aspect-[4/3] w-full bg-[#f3f3f3] object-cover transition-opacity group-hover:opacity-90"
+              />
+              <div className="mt-2 border-t border-black/10 pt-1 text-[11px] uppercase tracking-wider">
+                <div className="flex justify-between text-black/40">
+                  <span>{r.code}</span>
+                  <span>{r.date.replaceAll('-', '.')}</span>
+                </div>
+                <div className="mt-0.5 text-black group-hover:underline">{pick(r.title)}</div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+    </>
+  )
+}
+
+{ /* viejo formato 
+
+     <section className="mx-auto max-w-[1440px] px-4 md:px-6">
         {REFS.map((r) => (
           <Link
             key={r.slug}
@@ -51,6 +84,4 @@ function RefsPage() {
           </Link>
         ))}
       </section>
-    </>
-  )
-}
+*/}
