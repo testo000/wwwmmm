@@ -7,7 +7,7 @@ import { useI18n } from '@/lib/i18n'
 import { countCitations } from '@/lib/citations'
 
 export const Route = createFileRoute('/refs/')({
-  head: () => ({ meta: [{ title: 'Refs — UNTITLED' }] }),
+  head: () => ({ meta: [{ title: 'Refs' }] }),
   component: RefsPage,
 })
 

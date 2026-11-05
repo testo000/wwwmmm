@@ -1,13 +1,13 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { PageHeader } from '@/components/site/ui'
+import { PageHeader, Reveal } from '@/components/site/ui'
 import { WORKS } from '@/content/fixtures'
 import { useI18n } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 import { Carousel } from '@/components/site/carousel'
 
 export const Route = createFileRoute('/works')({
-  head: () => ({ meta: [{ title: 'Works — UNTITLED' }] }),
+  head: () => ({ meta: [{ title: 'Works' }] }),
   component: WorksPage,
 })
 
@@ -22,52 +22,50 @@ function WorksPage() {
         {WORKS.map((w, i) => {
           const wide = w.image.startsWith('live') || w.image.startsWith('header')
           return (
-            <article key={w.id} className="grid gap-6 border-b border-black/10 py-10 md:grid-cols-12 md:gap-8">
-              <div className="label md:col-span-2">
-                {w.code}
-                <br />
-                {String(i + 1).padStart(2, '0')} / {String(WORKS.length).padStart(2, '0')}
-              </div>
+            <Reveal key={w.id} fade>
+              <article className="grid gap-6 border-b border-black/10 py-10 md:grid-cols-12 md:gap-8">
+                <div className="label md:col-span-2">
+                  {w.code}
+                  <br />
+                  {String(i + 1).padStart(2, '0')} / {String(WORKS.length).padStart(2, '0')}
+                </div>
 
-              <div className={cn(wide ? 'md:col-span-6' : 'md:col-span-4')}>
-              
-              <Carousel
-  images={w.images ?? [w.image]}
-  caption={`${w.code} — ${pick(w.title)}`}
-  width={wide ? 1100 : 800} />
+                <div className={cn(wide ? 'md:col-span-6' : 'md:col-span-4')}>
+                  <Carousel
+                    images={w.images ?? [w.image]}
+                    caption={`${w.code} — ${pick(w.title)}`}
+                    width={wide ? 1100 : 800}
+                  />
+                </div>
 
-    </div>
+                <div className={cn('flex flex-col', wide ? 'md:col-span-4' : 'md:col-span-6')}>
+                  <h2 className="text-2xl font-medium tracking-tight md:text-3xl">{pick(w.title)}</h2>
+                  <p className="mt-3 max-w-md text-[14px] leading-relaxed text-black/60">{pick(w.note)}</p>
 
-
-              <div className={cn('flex flex-col', wide ? 'md:col-span-4' : 'md:col-span-6')}>
-                <h2 className="text-2xl font-medium tracking-tight md:text-3xl">{pick(w.title)}</h2>
-                <p className="mt-3 max-w-md text-[14px] leading-relaxed text-black/60">{pick(w.note)}</p>
-
-                <dl className="mt-6 grid max-w-md grid-cols-[8rem_1fr] border-t border-black/10 text-[12px]">
-                  <Spec label={t('works.client')} value={w.client} />
-                  <Spec label={t('works.role')} value={pick(w.role)} />
-                  <dt className="label border-b border-black/[0.06] py-2">{t('works.usedOn')}</dt>
-<dd className="border-b border-black/[0.06] py-2">
-  <ul className="flex flex-wrap gap-x-2 gap-y-1">
-    {w.usedOn.map((item) => (
-      <li key={item.label}>
-        {item.url ? (
-          <a href={item.url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-black">
-            {item.label}
-          </a>
-        ) : (
-          item.label
-        )}
-      </li>
-    ))}
-  </ul>
-</dd>
-                  <Spec label={t('common.year')} value={String(w.year)} />
-                </dl>
-
-          
-              </div>
-            </article>
+                  <dl className="mt-6 grid max-w-md grid-cols-[8rem_1fr] border-t border-black/10 text-[12px]">
+                    <Spec label={t('works.client')} value={w.client} />
+                    <Spec label={t('works.role')} value={pick(w.role)} />
+                    <dt className="label border-b border-black/[0.06] py-2">{t('works.usedOn')}</dt>
+                    <dd className="border-b border-black/[0.06] py-2">
+                      <ul className="flex flex-wrap gap-x-2 gap-y-1">
+                        {w.usedOn.map((item) => (
+                          <li key={item.label}>
+                            {item.url ? (
+                              <a href={item.url} target="_blank" rel="noreferrer" className="underline underline-offset-4 hover:text-black">
+                                {item.label}
+                              </a>
+                            ) : (
+                              item.label
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    </dd>
+                    <Spec label={t('common.year')} value={String(w.year)} />
+                  </dl>
+                </div>
+              </article>
+            </Reveal>
           )
         })}
       </section>

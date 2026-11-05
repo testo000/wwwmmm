@@ -19,6 +19,7 @@ type ViewerWindow = {
   y: number
   z: number
   zoom: number
+  closing?: boolean
 }
 
 type ViewerContextValue = {
@@ -59,7 +60,9 @@ export function ViewerProvider({ children }: { children: React.ReactNode }) {
       const existing = prev.find((w) => w.image === image)
       topZ.current += 1
       if (existing) {
-        return prev.map((w) => (w.key === existing.key ? { ...w, z: topZ.current } : w))
+        return prev.map((w) =>
+          w.key === existing.key ? { ...w, z: topZ.current, closing: false } : w,
+        )
       }
       const { w, h } = windowSize(image, 1)
       const vw = window.innerWidth
@@ -74,7 +77,12 @@ export function ViewerProvider({ children }: { children: React.ReactNode }) {
     })
   }, [])
 
-  const close = (key: number) => setWindows((prev) => prev.filter((w) => w.key !== key))
+  // Mark for closing: the window animates out and removes itself when done.
+  const close = (key: number) =>
+    setWindows((prev) => prev.map((w) => (w.key === key ? { ...w, closing: true } : w)))
+
+  const remove = (key: number) => setWindows((prev) => prev.filter((w) => w.key !== key))
+
   const focus = (key: number) => {
     topZ.current += 1
     setWindows((prev) => prev.map((w) => (w.key === key ? { ...w, z: topZ.current } : w)))
@@ -86,9 +94,10 @@ export function ViewerProvider({ children }: { children: React.ReactNode }) {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== 'Escape') return
       setWindows((prev) => {
-        if (!prev.length) return prev
-        const top = prev.reduce((a, b) => (a.z > b.z ? a : b))
-        return prev.filter((w) => w.key !== top.key)
+        const open = prev.filter((w) => !w.closing)
+        if (!open.length) return prev
+        const top = open.reduce((a, b) => (a.z > b.z ? a : b))
+        return prev.map((w) => (w.key === top.key ? { ...w, closing: true } : w))
       })
     }
     window.addEventListener('keydown', onKey)
@@ -103,6 +112,7 @@ export function ViewerProvider({ children }: { children: React.ReactNode }) {
           key={w.key}
           win={w}
           onClose={() => close(w.key)}
+          onRemove={() => remove(w.key)}
           onFocus={() => focus(w.key)}
           onChange={(patch) => update(w.key, patch)}
         />
@@ -120,11 +130,13 @@ export function useViewer() {
 function PreviewWindow({
   win,
   onClose,
+  onRemove,
   onFocus,
   onChange,
 }: {
   win: ViewerWindow
   onClose: () => void
+  onRemove: () => void
   onFocus: () => void
   onChange: (patch: Partial<ViewerWindow>) => void
 }) {
@@ -156,8 +168,14 @@ function PreviewWindow({
     <div
       role="dialog"
       aria-label={asset.filename}
-      onPointerDown={onFocus}
-      className="viewer-window fixed overflow-hidden rounded-[10px] bg-white"
+      onPointerDown={win.closing ? undefined : onFocus}
+      onAnimationEnd={(e) => {
+        if (e.target === e.currentTarget && win.closing) onRemove()
+      }}
+      className={cn(
+        'viewer-window fixed overflow-hidden rounded-[10px] bg-white',
+        win.closing ? 'viewer-out pointer-events-none' : 'viewer-in',
+      )}
       style={{ left: win.x, top: win.y, zIndex: win.z, width: w }}
     >
       <div
@@ -197,15 +215,25 @@ function PreviewWindow({
           {asset.filename}
         </div>
         <div className="ml-auto flex items-center gap-1 text-black/50">
-          <button type="button" aria-label="Zoom out" onClick={() => setZoom(win.zoom - 0.2)} className="rounded p-0.5 hover:bg-black/5">
+          <button
+            type="button"
+            aria-label="Zoom out"
+            onClick={() => setZoom(win.zoom - 0.2)}
+            className="rounded p-0.5 hover:bg-black/5"
+          >
             <Minus className="size-3" />
           </button>
-          <button type="button" aria-label="Zoom in" onClick={() => setZoom(win.zoom + 0.2)} className="rounded p-0.5 hover:bg-black/5">
+          <button
+            type="button"
+            aria-label="Zoom in"
+            onClick={() => setZoom(win.zoom + 0.2)}
+            className="rounded p-0.5 hover:bg-black/5"
+          >
             <Plus className="size-3" />
           </button>
         </div>
       </div>
-      <div className="relative bg-[#f2f2f2]" style={{ height: h }}>
+      <div className="viewer-stage relative bg-[#f2f2f2]" style={{ height: h }}>
         {!loaded && <div className="absolute inset-0 animate-pulse bg-[#ececec]" />}
         <img
           src={cdn(asset.src, Math.min(1600, Math.round(w * 2)))}
@@ -214,7 +242,10 @@ function PreviewWindow({
           height={h}
           draggable={false}
           onLoad={() => setLoaded(true)}
-          className={cn('block size-full object-contain transition-opacity duration-300', loaded ? 'opacity-100' : 'opacity-0')}
+          className={cn(
+            'block size-full object-contain transition-opacity duration-300',
+            loaded ? 'opacity-100' : 'opacity-0',
+          )}
         />
       </div>
       <div className="flex h-[26px] items-center justify-between gap-3 border-t border-black/10 bg-[#fafafa] px-3 font-mono text-[10px] uppercase tracking-wide text-black/45">

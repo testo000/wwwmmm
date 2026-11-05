@@ -19,12 +19,15 @@ const SECTION_DATA: Record<(typeof NAV)[number]['to'], { desc: DictKey; count: n
 function Home() {
   const { t, pick } = useI18n()
 
-  const latest = [
-    ...GALLERY.slice(0, 2).map((g) => ({ code: g.code, title: pick(g.title), section: t('nav.gallery'), to: '/gallery' as const, year: String(g.year) })),
-    ...WORKS.slice(0, 2).map((w) => ({ code: w.code, title: pick(w.title), section: t('nav.works'), to: '/works' as const, year: String(w.year) })),
-    ...ARCHIVE.slice(0, 1).map((a) => ({ code: a.code, title: pick(a.title), section: t('nav.archive'), to: '/archive' as const, year: a.date })),
-    ...REFS.slice(0, 1).map((r) => ({ code: r.code, title: pick(r.title), section: t('nav.refs'), to: '/refs' as const, year: r.date })),
-  ]
+ const latest = [
+  ...GALLERY.map((g) => ({ code: g.code, title: pick(g.title), section: t('nav.gallery'), to: '/gallery' as const, date: `${g.year}-01-01` })),
+  ...WORKS.map((w) => ({ code: w.code, title: pick(w.title), section: t('nav.works'), to: '/works' as const, date: `${w.year}-01-01` })),
+  ...ARCHIVE.map((a) => ({ code: a.code, title: pick(a.title), section: t('nav.archive'), to: '/archive' as const, date: a.date })),
+  ...REFS.map((r) => ({ code: r.code, title: pick(r.title), section: t('nav.refs'), to: '/refs' as const, date: r.date })),
+]
+.sort((a, b) => b.date.slice(0, 4).localeCompare(a.date.slice(0, 4)) || b.code.localeCompare(a.code))
+  .slice(0, 6)
+
 
   return (
     <div className="mx-auto max-w-[1440px] px-4 md:px-6">

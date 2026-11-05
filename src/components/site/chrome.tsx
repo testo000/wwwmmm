@@ -4,6 +4,8 @@ import { Link } from '@tanstack/react-router'
 import { SITE } from '@/content/fixtures'
 import { LOCALES, LOCALE_META, useI18n, type DictKey } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
+import { useLocalPlace } from '@/lib/use-local-place'
+
 
 export const NAV: { to: '/gallery' | '/works' | '/archive' | '/refs'; key: DictKey; num: string }[] = [
   { to: '/gallery', key: 'nav.gallery', num: '001' },
@@ -14,19 +16,21 @@ export const NAV: { to: '/gallery' | '/works' | '/archive' | '/refs'; key: DictK
 
 function Clock() {
   const [now, setNow] = useState<Date | null>(null)
+  const place = useLocalPlace()
   useEffect(() => {
     setNow(new Date())
     const id = setInterval(() => setNow(new Date()), 1000)
     return () => clearInterval(id)
   }, [])
   const pad = (n: number) => String(n).padStart(2, '0')
-  return (
-    <span className="tabular-nums">
-      {now
-        ? `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} — ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
-        : '----.--.-- — --:--:--'}
-    </span>
-  )
+return (
+  <span className="tabular-nums">
+    {now
+      ? `${now.getFullYear()}.${pad(now.getMonth() + 1)}.${pad(now.getDate())} — ${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
+      : '----.--.-- — --:--:--'}
+    {place && <span className="text-black/40"> — {place}</span>}
+  </span>
+)
 }
 
 export function LanguageSwitch({ className }: { className?: string }) {

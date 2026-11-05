@@ -9,7 +9,9 @@ export function Carousel({ images, caption, width = 800 }: { images: ImageId[]; 
 
   return (
     <div className="relative">
-      <Thumb image={images[i]} caption={`${caption} (${i + 1}/${images.length})`} width={width} />
+      <div key={i} className="carousel-slide">
+        <Thumb image={images[i]} caption={`${caption} (${i + 1}/${images.length})`} width={width} />
+      </div>
 
       {images.length > 1 && (
         <>

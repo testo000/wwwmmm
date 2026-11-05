@@ -1,11 +1,22 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
 import { Toaster } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { NotFoundPage } from '@/components/error-pages'
 import { SiteFooter, SiteHeader } from '@/components/site/chrome'
 import { ViewerProvider } from '@/components/site/viewer'
 import { I18nProvider } from '@/lib/i18n'
+import { HeadContent, Outlet, Scripts, createRootRoute, useRouterState } from '@tanstack/react-router'
+import { PageFade } from '@/components/site/ui'
+
+function RouteTransition() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname })
+  return (
+    <PageFade key={pathname}>
+      <Outlet />
+    </PageFade>
+  )
+}
+
+
 
 import '../styles.css'
 
@@ -60,7 +71,7 @@ export const Route = createRootRoute({
   notFoundComponent: NotFoundPage,
 })
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootDocument( ) {
   return (
     <html lang="es">
       <head>
@@ -72,7 +83,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             <ViewerProvider>
               <div className="flex min-h-screen flex-col">
                 <SiteHeader />
-                <main className="flex-1">{children}</main>
+               <main className="flex-1">
+  <RouteTransition />
+</main>
                 <SiteFooter />
               </div>
             </ViewerProvider>

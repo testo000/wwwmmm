@@ -4,8 +4,7 @@ import { useViewer } from '@/components/site/viewer'
 import { IMAGES, REFS } from '@/content/fixtures'
 import { parseBody } from '@/lib/citations'
 import { useI18n } from '@/lib/i18n'
-import { Thumb } from '@/components/site/ui'
-
+import { Reveal, Thumb } from '@/components/site/ui'
 
 export const Route = createFileRoute('/refs/$slug')({
   loader: ({ params }) => {
@@ -15,7 +14,7 @@ export const Route = createFileRoute('/refs/$slug')({
   },
   head: ({ loaderData }) => {
     const post = REFS.find((r) => r.slug === loaderData?.slug)
-    return { meta: [{ title: post ? `${post.title.es} — Refs — UNTITLED` : 'Refs — UNTITLED' }] }
+    return { meta: [{ title: post ? `${post.title.es} — Refs` : 'Refs' }] }
   },
   component: RefPostPage,
 })
@@ -30,7 +29,8 @@ function RefPostPage() {
 
   const translated = locale !== 'es' ? post.body[locale] : undefined
   const paragraphs = parseBody(translated ?? post.body.es)
-  const total = paragraphs.flat().filter((s) => s.kind === 'cite').length
+  const cited = paragraphs.flat().filter((s) => s.kind === 'cite')
+const total = new Set([...cited.map((s) => s.image), ...(post.gallery?.map((g) => g.image) ?? [])]).size
   const idx = REFS.indexOf(post)
   const next = REFS[(idx + 1) % REFS.length]
 
@@ -48,8 +48,8 @@ function RefPostPage() {
             {post.code} — {post.date.replaceAll('-', '.')}
           </p>
           <h1 className="max-w-4xl text-5xl leading-[0.95] font-medium tracking-tighter uppercase md:text-7xl">
-  {pick(post.title)}
-</h1>
+            {pick(post.title)}
+          </h1>
 
           <p className="mt-6 max-w-xl text-[16px] leading-relaxed text-black/60">{pick(post.excerpt)}</p>
         </div>
@@ -69,50 +69,49 @@ function RefPostPage() {
         <p className="label border-b border-black/[0.06] py-2 md:pl-[16.66%]">{t('refs.translationNote')}</p>
       )}
 
-    <div className="mx-auto max-w-[68ch] py-8">
+      <div className="mx-auto max-w-[68ch] py-8">
         {paragraphs.map((segments, pi) => (
           <p key={pi} className="mb-5 text-[16px] leading-[1.7]">
             {segments.map((s, si) =>
               s.kind === 'text' ? (
                 <span key={si}>{s.text}</span>
               ) : (
-                <button
-                  key={si}
-                  type="button"
-                  className="cite inline text-left"
-                  onClick={(e) => openImage(s.image, e, `fig. ${pad(s.index)} — ${s.text}`)}
-                >
-                  {s.text}
-                  <sup className="ml-0.5 font-mono text-[10px] text-black/50">{pad(s.index)}</sup>
-                </button>
+                <Reveal key={si} as="span" fade className="inline">
+                  <button
+                    type="button"
+                    className="cite inline text-left"
+                    onClick={(e) => openImage(s.image, e, `fig. ${pad(s.index)} — ${s.text}`)}
+                  >
+                    {s.text}
+                    <sup className="ml-0.5 font-mono text-[10px] text-black/50">{pad(s.index)}</sup>
+                  </button>
+                </Reveal>
               ),
             )}
           </p>
         ))}
       </div>
 
-           {post.gallery && post.gallery.length > 0 && (
+      {post.gallery && post.gallery.length > 0 && (
         <section className="mx-auto max-w-[1440px] px-4 pt-4 pb-10 md:px-6">
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
-            {post.gallery.map((g) => (
-              <figure key={g.image}>
-                <Thumb image={g.image} caption={`${g.code} — ${pick(g.title)}`} width={600} />
-<figcaption className="mt-2 grid grid-cols-[1fr_auto] gap-x-2 text-[12px]">
-  <span className="truncate">{pick(g.title)}</span>
-  <span className="label">
-    {IMAGES[g.image].width}×{IMAGES[g.image].height}
-  </span>
-  <span className="label truncate">{g.code}</span>
-</figcaption>
-
-              </figure>
+            {post.gallery.map((g, i) => (
+              <Reveal key={g.image} fade delay={(i % 4) * 60}>
+                <figure>
+                  <Thumb image={g.image} caption={`${g.code} — ${pick(g.title)}`} width={600} />
+                  <figcaption className="mt-2 grid grid-cols-[1fr_auto] gap-x-2 text-[12px]">
+                    <span className="truncate">{pick(g.title)}</span>
+                    <span className="label">
+                      {IMAGES[g.image].width}×{IMAGES[g.image].height}
+                    </span>
+                    <span className="label truncate">{g.code}</span>
+                  </figcaption>
+                </figure>
+              </Reveal>
             ))}
           </div>
         </section>
       )}
-
-
-
 
       {/* Spec card */}
       <footer className="grid gap-6 border-t border-black/10 pt-8 md:grid-cols-12">

@@ -2,6 +2,10 @@ import { IMAGES, type ImageId } from '@/content/fixtures'
 import { cdn } from '@/lib/image'
 import { cn } from '@/lib/utils'
 import { useViewer } from './viewer'
+import { useReveal } from '@/lib/use-reveal'
+import { useEffect, useState, type ReactNode } from 'react'
+
+
 
 export function PageHeader({
   num,
@@ -98,6 +102,39 @@ export function FilterBar<T extends string>({
           {counts?.[o.value] !== undefined && <sup className="label">{String(counts[o.value]).padStart(2, '0')}</sup>}
         </button>
       ))}
+    </div>
+  )
+}
+
+
+
+export function Reveal({ children, className, delay = 0, fade = false }: { children: ReactNode; className?: string; delay?: number; fade?: boolean }) {
+  const { ref, visible } = useReveal<HTMLDivElement>()
+  return (
+    <div
+      ref={ref}
+      style={{ transitionDelay: `${delay}ms` }}
+      className={cn(
+        'transition-all duration-700 ease-out',
+        visible ? 'translate-y-0 opacity-100' : fade ? 'opacity-0' : 'translate-y-4 opacity-0',
+        className,
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+export function PageFade({ children }: { children: ReactNode }) {
+  const [shown, setShown] = useState(false)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    const id = requestAnimationFrame(() => setShown(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+  return (
+    <div className={cn('transition-opacity duration-300 ease-out', shown ? 'opacity-100' : 'opacity-0')}>
+      {children}
     </div>
   )
 }
