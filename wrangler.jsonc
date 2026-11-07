@@ -6,10 +6,7 @@
   "assets": {
     "directory": "./dist/client",
     "binding": "ASSETS"
-  }
-}
-
-{
+  },
   "observability": {
     "logs": {
       "enabled": false,
