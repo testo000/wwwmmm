@@ -3,6 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 export const LOCALES = ['es', 'en', 'ja', 'ko', 'zh'] as const
 export type Locale = (typeof LOCALES)[number]
 
+
 /** Short label shown in the switcher + native name for tooltips. */
 export const LOCALE_META: Record<Locale, { short: string; native: string; html: string }> = {
   es: { short: 'ES', native: 'Español', html: 'es' },
@@ -21,6 +22,7 @@ const dict = {
   'nav.works': { es: 'Works', en: 'Works', ja: 'ワークス', ko: '작업', zh: '作品' },
   'nav.archive': { es: 'Archivo', en: 'Archive', ja: 'アーカイブ', ko: '아카이브', zh: '档案' },
   'nav.refs': { es: 'Refs', en: 'Refs', ja: '参照', ko: '레퍼런스', zh: '参考' },
+  'nav.store': { es: 'Tienda', en: 'Store', ja: 'ストア', ko: '스토어', zh: '商店' },
 
   'home.statement': {
     es: ' "Colocar texto de mamador" ',
@@ -57,6 +59,13 @@ const dict = {
     ko: '눈길을 끈 것들에 대한 기록',
     zh: '关于那些引起我注意之物的笔记',
   },
+  'home.store': {
+     es: 'Diseños pre-hechos listos para usar',
+     en: 'Pre-made designs, ready to use',
+      ja: 'すぐに使える既製デザイン', 
+      ko: '바로 사용할 수 있는 사전 제작 디자인.', 
+      zh: '可直接使用的现成设计' },
+
   'home.latest': { es: 'Últimas entradas', en: 'Latest entries', ja: '最新', ko: '최근 항목', zh: '最新条目' },
   'home.entries': { es: 'entradas', en: 'entries', ja: '件', ko: '개', zh: '条' },
   'common.viewAll': { es: 'Ver todo', en: 'View all', ja: 'すべて見る', ko: '전체 보기', zh: '查看全部' },
@@ -126,6 +135,31 @@ const dict = {
     ko: '원문은 스페인어입니다.',
     zh: '原文为西班牙语。',
   },
+
+  'store.title': { es: 'Tienda', en: 'Store', ja: 'ストア', ko: '스토어', zh: '商店' },
+'store.intro': {
+  es: 'Diseños listos para usar. El pago se completa en Payhip*',
+  en: 'Ready-to-use designs. Checkout is completed on Payhip*',
+  ja: 'すぐに使えるデザイン。お支払いはPayhipで完了します*',
+  ko: '바로 사용할 수 있는 디자인. 결제는 Payhip에서 완료됩니다*',
+  zh: '可直接使用的设计。付款在 Payhip 完成*',
+},
+'store.buy': { es: 'Comprar', en: 'Buy', ja: '購入', ko: '구매', zh: '购买' },
+'store.redirect': {
+  es: 'Serás redirigido a Payhip para completar el pago*',
+  en: 'You will be redirected to Payhip to complete the payment*',
+  ja: 'お支払いのためPayhipへ移動します*',
+  ko: '결제를 위해 Payhip으로 이동합니다*',
+  zh: '将跳转至 Payhip 完成付款*',
+},
+'store.empty': {
+  es: 'na nei.',
+  en: 'No designs published yet.',
+  ja: 'まだデザインが公開されていません。',
+  ko: '아직 공개된 디자인이 없습니다.',
+  zh: '暂无已发布的设计。',
+},
+
 
   'footer.contact': { es: 'Encargos / colaboraciones', en: 'Commissions / collaborations', ja: '依頼／コラボレーション', ko: '의뢰 / 협업', zh: '委托 / 合作' },
   'footer.note': {

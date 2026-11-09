@@ -4,27 +4,32 @@ import { NAV } from '@/components/site/chrome'
 import { Thumb } from '@/components/site/ui'
 import { ARCHIVE, GALLERY, REFS, SITE, WORKS, type ImageId } from '@/content/fixtures'
 import { useI18n, type DictKey } from '@/lib/i18n'
+import { products } from '../lib/products'
 
 export const Route = createFileRoute('/')({
   component: Home,
 })
 
-const SECTION_DATA: Record<(typeof NAV)[number]['to'], { desc: DictKey; count: number; images: ImageId[] }> = {
+const SECTION_DATA: Record<(typeof NAV)[number]['to'], { desc: DictKey; count: number; images: (ImageId | string)[] }> = {
   '/gallery': { desc: 'home.gallery', count: GALLERY.length, images: GALLERY.slice(0, 4).map((g) => g.image) },
   '/works': { desc: 'home.works', count: WORKS.length, images: WORKS.slice(0, 4).map((w) => w.image) },
   '/archive': { desc: 'home.archive', count: ARCHIVE.length, images: ARCHIVE.slice(0, 4).map((a) => a.images[0]) },
   '/refs': { desc: 'home.refs', count: REFS.length, images: REFS.map((r) => r.cover) },
+'/store': { desc: 'home.store', count: products.length, images: products.slice(0, 3).map((p) => p.image) },
+
+
 }
 
 function Home() {
   const { t, pick } = useI18n()
 
- const latest = [
-  ...GALLERY.map((g) => ({ code: g.code, title: pick(g.title), section: t('nav.gallery'), to: '/gallery' as const, date: `${g.year}-01-01` })),
-  ...WORKS.map((w) => ({ code: w.code, title: pick(w.title), section: t('nav.works'), to: '/works' as const, date: `${w.year}-01-01` })),
-  ...ARCHIVE.map((a) => ({ code: a.code, title: pick(a.title), section: t('nav.archive'), to: '/archive' as const, date: a.date })),
-  ...REFS.map((r) => ({ code: r.code, title: pick(r.title), section: t('nav.refs'), to: '/refs' as const, date: r.date })),
+const latest = [
+  ...GALLERY.map((g) => ({ code: g.code, title: pick(g.title), section: t('nav.gallery'), to: '/gallery' as const, date: `${g.year}-01-01`, year: g.year })),
+  ...WORKS.map((w) => ({ code: w.code, title: pick(w.title), section: t('nav.works'), to: '/works' as const, date: `${w.year}-01-01`, year: w.year })),
+  ...ARCHIVE.map((a) => ({ code: a.code, title: pick(a.title), section: t('nav.archive'), to: '/archive' as const, date: a.date, year: a.date.slice(0, 4) })),
+  ...REFS.map((r) => ({ code: r.code, title: pick(r.title), section: t('nav.refs'), to: '/refs' as const, date: r.date, year: r.date.slice(0, 4) })),
 ]
+
 .sort((a, b) => b.date.slice(0, 4).localeCompare(a.date.slice(0, 4)) || b.code.localeCompare(a.code))
   .slice(0, 6)
 
@@ -56,38 +61,44 @@ function Home() {
         </div>
       </section>
 
-      {/* Section index */}
-      <section>
-        {NAV.map((n) => {
-          const data = SECTION_DATA[n.to]
-          return (
-            <div key={n.to} className="grid gap-4 border-b border-black/10 py-6 md:grid-cols-12 md:items-center">
-              <div className="label md:col-span-2">{n.num}</div>
-              <div className="md:col-span-4">
-                <Link to={n.to} className="group inline-flex items-baseline gap-3">
-                  <h2 className="text-3xl font-medium tracking-tight group-hover:underline group-hover:decoration-1 group-hover:underline-offset-[6px] md:text-4xl">
-                    {t(n.key)}
-                  </h2>
-                  <span className="label">
-                    ({String(data.count).padStart(2, '0')})
-                  </span>
-                </Link>
-                <p className="mt-2 text-[13px] text-black/55">{t(data.desc)}</p>
-              </div>
-              <div className="grid grid-cols-4 gap-2 md:col-span-5">
-                {data.images.slice(0, 4).map((img, i) => (
-                  <Thumb key={`${img}-${i}`} image={img} width={240} aspect="1 / 1" />
-                ))}
-              </div>
-              <div className="md:col-span-1 md:text-right">
-                <Link to={n.to} className="label hover:text-black">
-                  {t('common.viewAll')} →
-                </Link>
-              </div>
-            </div>
-          )
-        })}
-      </section>
+ {/* Section index */}
+<section>
+  {NAV.map((n) => {
+    const data = SECTION_DATA[n.to]
+    return (
+      <div key={n.to} className="grid gap-4 border-b border-black/10 py-6 md:grid-cols-12 md:items-center">
+        <div className="label md:col-span-2">{n.num}</div>
+        <div className="md:col-span-4">
+          <Link to={n.to} className="group inline-flex items-baseline gap-3">
+            <h2 className="text-3xl font-medium tracking-tight group-hover:underline group-hover:decoration-1 group-hover:underline-offset-[6px] md:text-4xl">
+              {t(n.key)}
+            </h2>
+            <span className="label">
+              ({String(data.count).padStart(2, '0')})
+            </span>
+          </Link>
+          <p className="mt-2 text-[13px] text-black/55">{t(data.desc)}</p>
+        </div>
+        <div className="grid grid-cols-4 gap-2 md:col-span-5">
+{data.images.slice(0, 4).map((img, i) => {
+  const isPath = typeof img === 'string' && img.startsWith('/')
+  return isPath ? (
+    <img key={`${img}-${i}`} src={img} width={240} height={240} className="aspect-square object-cover" alt="" />
+  ) : (
+    <Thumb key={`${img}-${i}`} image={img as ImageId} width={240} aspect="1 / 1" />
+  )
+})}
+        </div>
+        <div className="md:col-span-1 md:text-right">
+          <Link to={n.to} className="label hover:text-black">
+            {t('common.viewAll')} →
+          </Link>
+        </div>
+      </div>
+    )
+  })}
+</section>
+
 
       {/* Latest */}
       <section className="pt-14">

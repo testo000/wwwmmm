@@ -7,11 +7,12 @@ import { cn } from '@/lib/utils'
 import { useLocalPlace } from '@/lib/use-local-place'
 
 
-export const NAV: { to: '/gallery' | '/works' | '/archive' | '/refs'; key: DictKey; num: string }[] = [
+export const NAV: { to: '/gallery' | '/works' | '/archive' | '/refs' | '/store'; key: DictKey; num: string }[] = [
   { to: '/gallery', key: 'nav.gallery', num: '001' },
   { to: '/works', key: 'nav.works', num: '002' },
   { to: '/archive', key: 'nav.archive', num: '003' },
   { to: '/refs', key: 'nav.refs', num: '004' },
+  { to: '/store', key: 'nav.store', num: '005' },
 ]
 
 function Clock() {
